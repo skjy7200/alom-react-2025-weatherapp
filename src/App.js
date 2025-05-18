@@ -11,18 +11,20 @@ function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    fetch(API_URL)
-      .then((response) => response.json())
-      .then((data) => {
-        setWeatherData(data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error("데이터 로드 실패:", error);
-        setIsLoading(false);
-      });
-  }, []);
+useEffect(() => {
+  fetch(API_URL)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("API 데이터 확인:", data);  
+      setWeatherData(data);
+      setIsLoading(false);
+    })
+    .catch((error) => {
+      console.error("데이터 로드 실패:", error);
+      setIsLoading(false);
+    });
+}, []);
+
 
   return (
     <Container>
