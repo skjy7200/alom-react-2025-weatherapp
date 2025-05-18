@@ -20,20 +20,30 @@ export const getWeatherDescription = (code) => {
 };
 
 export const formatHourlyData = (weatherData) => {
-  if (!weatherData || !weatherData.hourly) return [];
+  if (
+    !weatherData ||
+    !weatherData.hourly ||
+    !weatherData.hourly.time ||
+    !weatherData.hourly.temperature_2m ||
+    !weatherData.hourly.weathercode
+  ) {
+    console.warn("Hourly weather data is incomplete:", weatherData);
+    return [];
+  }
 
   const { time, temperature_2m, weathercode } = weatherData.hourly;
 
-  // 상위 7개 시간만 추출
+  const length = Math.min(time.length, temperature_2m.length, weathercode.length);
+
   return time.slice(0, 7).map((t, idx) => {
-    const hour = new Date(t).getHours();
     return {
-      time: `${hour}시`,
+      time: `${new Date(t).getHours()}시`,
       temp: temperature_2m[idx],
       code: weathercode[idx],
     };
   });
 };
+
 
 export const formatDailyData = (weatherData) => {
   if (!weatherData || !weatherData.daily) return [];
