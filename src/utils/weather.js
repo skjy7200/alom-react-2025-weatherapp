@@ -20,13 +20,37 @@ export const getWeatherDescription = (code) => {
 };
 
 export const formatHourlyData = (weatherData) => {
-  if (!weatherData) return [];
-  // 밑에 코드 채워주세요
-  return [];
+  if (!weatherData || !weatherData.hourly) return [];
+
+  const { time, temperature_2m, weathercode } = weatherData.hourly;
+
+  // 상위 7개 시간만 추출
+  return time.slice(0, 7).map((t, idx) => {
+    const hour = new Date(t).getHours();
+    return {
+      time: `${hour}시`,
+      temp: temperature_2m[idx],
+      code: weathercode[idx],
+    };
+  });
 };
 
 export const formatDailyData = (weatherData) => {
-  if (!weatherData) return [];
-  // 밑에 코드 채워주세요
-  return [];
+  if (!weatherData || !weatherData.daily) return [];
+
+  const { time, temperature_2m_max, weathercode } = weatherData.daily;
+
+  return time.slice(0, 7).map((dateStr, idx) => {
+    const date = new Date(dateStr);
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const dayNames = ["일", "월", "화", "수", "목", "금", "토"];
+    const dayOfWeek = dayNames[date.getDay()];
+
+    return {
+      date: `${month}월 ${day}일 (${dayOfWeek})`,
+      temp: temperature_2m_max[idx],
+      code: weathercode[idx],
+    };
+  });
 };
