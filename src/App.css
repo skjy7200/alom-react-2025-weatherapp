@@ -1,38 +1,69 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom, #84c4ec, #5ba4d6);
+  font-family: 'Noto Sans KR', sans-serif;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.App {
+  text-align: center;
+  padding: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.App-header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.CurrentWeatherWrapper {
+  margin: 40px 0;
+}
+
+.Temperature {
+  font-size: 64px;
+  font-weight: bold;
+}
+
+.WeatherCode {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.HourlyForecastWrapper {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  max-width: 800px;
+}
+
+.HourlyItem {
+  flex: 1;
+  text-align: center;
+  font-size: 14px;
+}
+
+.DailyForecastWrapper {
+  margin-top: 30px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.DailyItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 14px;
+}
+
+.DailyItem:last-child {
+  border-bottom: none;
 }
