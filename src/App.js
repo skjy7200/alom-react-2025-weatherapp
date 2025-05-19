@@ -26,17 +26,18 @@ useEffect(() => {
 }, []);
 
 
-  return (
-    <Container>
-      <CurrentWeather weatherData={weatherData} isLoading={isLoading} />
-      {!isLoading && weatherData && (
-        <>
-          <HourlyForecast weatherData={weatherData} />
-          <DailyForecast weatherData={weatherData} />
-        </>
-      )}
-    </Container>
-  );
-}
+return (
+  <Container>
+    {isLoading && <div>로딩 중...</div>}
+    {!isLoading && weatherData && weatherData.hourly && weatherData.hourly.time && (
+      <>
+        <CurrentWeather weatherData={weatherData} isLoading={isLoading} />
+        <HourlyForecast weatherData={weatherData} />
+        <DailyForecast weatherData={weatherData} />
+      </>
+    )}
+  </Container>
+);
+
 
 export default App;
