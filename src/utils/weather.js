@@ -20,45 +20,31 @@ export const getWeatherDescription = (code) => {
 };
 
 export const formatHourlyData = (weatherData) => {
-  if (
-    !weatherData ||
-    !weatherData.hourly ||
-    !Array.isArray(weatherData.hourly.time) ||
-    !Array.isArray(weatherData.hourly.temperature_2m) ||
-    !Array.isArray(weatherData.hourly.weathercode)
-  ) {
-    console.warn("⚠️ Hourly weather data가 불완전합니다:", weatherData);
-    return [];
-  }
+  const { time, temperature_2m, weathercode } = weatherData?.hourly || {};
 
-  const { time, temperature_2m, weathercode } = weatherData.hourly;
-  const length = Math.min(time.length, temperature_2m.length, weathercode.length);
+  if (!Array.isArray(time)) return [];
 
-  return time.slice(0, 7).map((t, idx) => ({
+  return time.slice(0, 12).map((t, idx) => ({
     time: `${new Date(t).getHours()}시`,
-    temp: temperature_2m[idx],
-    code: weathercode[idx],
+    temp: temperature_2m?.[idx],
+    code: weathercode?.[idx],
   }));
 };
 
-
-
 export const formatDailyData = (weatherData) => {
-  if (!weatherData || !weatherData.daily) return [];
+  const { time, temperature_2m_max, weathercode } = weatherData?.daily || {};
 
-  const { time, temperature_2m_max, weathercode } = weatherData.daily;
+  if (!Array.isArray(time)) return [];
 
-  return time.slice(0, 7).map((dateStr, idx) => {
-    const date = new Date(dateStr);
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    const dayNames = ["일", "월", "화", "수", "목", "금", "토"];
-    const dayOfWeek = dayNames[date.getDay()];
+  return time.slice(0, 7).map((t, idx) => {
+    const date = new Date(t);
+    const weekdays = ["일", "월", "화", "수", "목", "금", "토"];
+    const label = `${date.getMonth() + 1}월 ${date.getDate()}일 (${weekdays[date.getDay()]})`;
 
     return {
-      date: `${month}월 ${day}일 (${dayOfWeek})`,
-      temp: temperature_2m_max[idx],
-      code: weathercode[idx],
+      date: label,
+      temp: temperature_2m_max?.[idx],
+      code: weathercode?.[idx],
     };
   });
 };
