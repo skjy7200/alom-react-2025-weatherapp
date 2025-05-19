@@ -3,16 +3,16 @@ import {
   CurrentWeatherWrapper,
   Temperature,
   WeatherCode,
-} from "./styles/StyledComponents";
+} from "../styles/StyledComponents";
 import { getWeatherDescription } from "../utils/weather";
 
 const CurrentWeather = ({ weatherData, isLoading }) => {
-  if (isLoading || !weatherData) {
+  if (isLoading || !weatherData?.hourly?.temperature_2m?.length) {
     return <div>로딩 중...</div>;
   }
 
-  const temperature = weatherData.current?.temperature ?? 0;
-  const code = weatherData.current?.weatherCode ?? 0;
+  const temperature = weatherData.hourly.temperature_2m[0];
+  const code = weatherData.hourly.weathercode[0];
   const description = getWeatherDescription(code);
 
   return (
