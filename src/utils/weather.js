@@ -23,16 +23,15 @@ export const formatHourlyData = (weatherData) => {
   if (
     !weatherData ||
     !weatherData.hourly ||
-    !weatherData.hourly.time ||
-    !weatherData.hourly.temperature_2m ||
-    !weatherData.hourly.weathercode
+    !Array.isArray(weatherData.hourly.time) ||
+    !Array.isArray(weatherData.hourly.temperature_2m) ||
+    !Array.isArray(weatherData.hourly.weathercode)
   ) {
     console.warn("⚠️ Hourly weather data가 불완전합니다:", weatherData);
     return [];
   }
 
   const { time, temperature_2m, weathercode } = weatherData.hourly;
-
   const length = Math.min(time.length, temperature_2m.length, weathercode.length);
 
   return time.slice(0, 7).map((t, idx) => ({
