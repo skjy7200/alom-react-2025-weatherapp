@@ -2,16 +2,16 @@ import React from "react";
 import {
   DailyForecastWrapper,
   DailyItem,
-} from "./styles/StyledComponents";
+} from "../styles/StyledComponents";
 import { getWeatherDescription, formatDailyData } from "../utils/weather";
 
 const DailyForecast = ({ weatherData }) => {
-  const dailyData = formatDailyData(weatherData);
+  const daily = formatDailyData(weatherData);
 
   return (
     <DailyForecastWrapper>
-      {dailyData.map((item, idx) => (
-        <DailyItem key={idx}>
+      {daily.map((item, i) => (
+        <DailyItem key={i}>
           <div>{item.date}</div>
           <div>{getWeatherDescription(item.code)}</div>
           <div>{item.temp}°C</div>
