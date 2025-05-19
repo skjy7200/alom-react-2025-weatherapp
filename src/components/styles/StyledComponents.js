@@ -1,66 +1,52 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  min-height: 100vh;
-  background: linear-gradient(to bottom, #87ceeb, #4682b4);
+  text-align: center;
   padding: 20px;
+  color: white;
+  background: linear-gradient(to bottom, #5ba4d6, #2e86c1);
+  min-height: 100vh;
 `;
 
 export const CurrentWeatherWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 60vh;
-  color: white;
+  margin: 30px 0;
 `;
 
-export const Temperature = styled.h1`
-  font-size: 4rem;
-  margin: 0;
+export const Temperature = styled.div`
+  font-size: 60px;
+  font-weight: bold;
 `;
 
-export const WeatherCode = styled.p`
-  font-size: 1.5rem;
-  margin: 10px 0;
+export const WeatherCode = styled.div`
+  font-size: 20px;
+  margin-top: 10px;
 `;
 
 export const HourlyForecastWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
-  gap: 10px;
   overflow-x: auto;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 15px;
-  margin-top: auto;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  margin-bottom: 20px;
 `;
 
 export const HourlyItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: white;
-  padding: 10px;
-  min-width: 100px;
+  min-width: 80px;
+  margin: 0 10px;
+  text-align: center;
 `;
 
 export const DailyForecastWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 15px;
-  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
 `;
 
 export const DailyItem = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  color: white;
-  padding: 10px;
+  padding: 10px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 
   &:last-child {
