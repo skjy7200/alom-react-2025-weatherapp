@@ -27,7 +27,7 @@ export const formatHourlyData = (weatherData) => {
     !weatherData.hourly.temperature_2m ||
     !weatherData.hourly.weathercode
   ) {
-    console.warn("Hourly weather data is incomplete:", weatherData);
+    console.warn("⚠️ Hourly weather data가 불완전합니다:", weatherData);
     return [];
   }
 
@@ -35,14 +35,13 @@ export const formatHourlyData = (weatherData) => {
 
   const length = Math.min(time.length, temperature_2m.length, weathercode.length);
 
-  return time.slice(0, 7).map((t, idx) => {
-    return {
-      time: `${new Date(t).getHours()}시`,
-      temp: temperature_2m[idx],
-      code: weathercode[idx],
-    };
-  });
+  return time.slice(0, 7).map((t, idx) => ({
+    time: `${new Date(t).getHours()}시`,
+    temp: temperature_2m[idx],
+    code: weathercode[idx],
+  }));
 };
+
 
 
 export const formatDailyData = (weatherData) => {
